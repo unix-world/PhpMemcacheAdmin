@@ -9,7 +9,8 @@ if(!defined('ENT_IGNORE'))
 }
 
 # Autoloader
-function __autoload($class)
-{
+function autoload__TheClasses($class) {
     require_once str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
 }
+
+spl_autoload_register('autoload__TheClasses', true, false); // throw / prepend

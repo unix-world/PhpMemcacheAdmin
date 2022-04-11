@@ -105,7 +105,7 @@
                 <?php echo (isset($stats['decr_hits'])) ? $stats['decr_rate'] . ' Request/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
-        
+
         <div class="sub-header corner padding">Touch <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
@@ -213,7 +213,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Rate</span>
                 <?php echo (isset($stats['reclaimed'])) ? $stats['reclaimed_rate'] . ' Reclaimed/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
-            
+
             <div class="line" style="margin-top:4px;">
                 <span class="left setting help" title="Internal name : expired_unfetched&#013;Items pulled from LRU that were never touched by get/incr/append/etc before expiring">Expired unfetched</span>
                 <?php echo (isset($stats['expired_unfetched'])) ? Library_Data_Analysis::hitResize($stats['expired_unfetched']) : 'N/A on ' . $stats['version']; ?>
@@ -242,6 +242,10 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 {
                     echo 'N/A on ' . $stats['version'];
                 }?>
+            </div>
+            <div class="line">
+                <span class="left setting help" title="Internal name : item_size_max&#013;Maximum number of bytes allowed per object">Max Object Size (Bytes)</span>
+                <?php echo (isset($settings['item_size_max'])) ? Library_Data_Analysis::byteResize($settings['item_size_max']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
                 <span class="left setting help" title="Internal name : maxbytes&#013;Maximum number of bytes allowed in this cache">Max Bytes</span>
@@ -401,10 +405,10 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             </div>
          </div>
 <?php
-} 
+}
 # Viewing a cluster
 elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
-{ ?>       
+{ ?>
         <div class="sub-header corner padding">Hash Table <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
@@ -425,7 +429,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                 <?php if(isset($stats['slab_reassign_running'])) { if($stats['slab_reassign_running']) { echo 'Yes'; } else { echo 'No'; } } else { echo 'N/A on ' . $stats['version']; } ?>
             </div>
          </div>
-         
+
         <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
